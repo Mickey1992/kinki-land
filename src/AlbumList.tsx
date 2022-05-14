@@ -34,7 +34,7 @@ function AlbumList() {
     const albumsNodes: Album[] = albumData;
     const displayAlbums = albumsNodes.map(albumNode => {
       return (
-                <div className="photo-album">
+                <div key={albumNode.folderName} className="photo-album">
                   <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", albumNode)} alt={albumNode.displayName} />
                   <br/>
                   <span className="photo-album-name">{albumNode.displayName}</span>
