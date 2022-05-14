@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-type AlbumNode = string | Album;
+type AlbumNode = string | AlbumData;
 
-interface Album {
+interface AlbumData {
     folderName: string,
     displayName: string;
     cover?: string,
@@ -11,7 +11,18 @@ interface Album {
 }
 
 function AlbumList() {
-  const [albums, setAlbums] = useState<Album[] | null>(null);
+  const albums = useAlbums();
+
+  if(albums === null){
+    return <div>...loading</div>
+  }else{
+    return <>{albums.map(album => <Album key={album.folderName} album={album}/>)}</>
+
+  }
+}
+
+function useAlbums() {
+  const [albums, setAlbums] = useState<AlbumData[] | null>(null);
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -27,27 +38,19 @@ function AlbumList() {
     }
   }, [setAlbums]);
 
-  let content = null;
-  if(albums === null){
-    content = <div>...loading</div>
-  }else{
-    const albumList = albums.map(album => {
-      return (
-                <div key={album.folderName} className="photo-album">
-                  <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", album)} alt={album.displayName} />
-                  <br/>
-                  <span className="photo-album-name">{album.displayName}</span>
-                </div>
-              )
-    })
-    content = <>{albumList}</>
-
-  }
-
-  return content;
+  return albums;
 }
 
-function getCoverPath(parentPath: string, album: Album) :string{
+function Album(props: {album: AlbumData}) {
+  return (
+    <div className="photo-album">
+      <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", props.album)} alt={props.album.displayName} />
+      <span className="photo-album-name">{props.album.displayName}</span>
+    </div>
+  )
+}
+
+function getCoverPath(parentPath: string, album: AlbumData) :string{
   const newParentPath = parentPath + "/" + album.folderName;
 
   if(album.cover){
