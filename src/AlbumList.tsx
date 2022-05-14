@@ -31,16 +31,16 @@ function AlbumList() {
   if(albums === null){
     content = <div>...loading</div>
   }else{
-    const displayAlbums = albums.map(albumNode => {
+    const albumList = albums.map(album => {
       return (
-                <div key={albumNode.folderName} className="photo-album">
-                  <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", albumNode)} alt={albumNode.displayName} />
+                <div key={album.folderName} className="photo-album">
+                  <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", album)} alt={album.displayName} />
                   <br/>
-                  <span className="photo-album-name">{albumNode.displayName}</span>
+                  <span className="photo-album-name">{album.displayName}</span>
                 </div>
               )
     })
-    content = <>{displayAlbums}</>
+    content = <>{albumList}</>
 
   }
 
