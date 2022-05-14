@@ -4,12 +4,13 @@ import './App.css';
 type AlbumNode = string | Album;
 
 interface Album {
-    name: string,
+    folderName: string,
+    displayName: string;
     cover?: string,
     children: AlbumNode[]
 }
 
-function App() {
+function AlbumList() {
   const [albumData, setAlbumData] = useState(null);
 
   useEffect(() => {
@@ -34,9 +35,9 @@ function App() {
     const displayAlbums = albumsNodes.map(albumNode => {
       return (
                 <div className="photo-album">
-                  <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", albumNode)} alt={albumNode.name} />
+                  <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", albumNode)} alt={albumNode.displayName} />
                   <br/>
-                  <span className="photo-album-name">{albumNode.name}</span>
+                  <span className="photo-album-name">{albumNode.displayName}</span>
                 </div>
               )
     })
@@ -48,7 +49,7 @@ function App() {
 }
 
 function getCoverPath(parentPath: string, album: Album) :string{
-  const newParentPath = parentPath + "/" + album.name;
+  const newParentPath = parentPath + "/" + album.folderName;
 
   if(album.cover){
     return newParentPath + "/" + album.cover;
@@ -62,5 +63,5 @@ function getCoverPath(parentPath: string, album: Album) :string{
   return newParentPath + "/" + lastFile;
 }
 
-export default App;
+export default AlbumList;
 
