@@ -11,28 +11,27 @@ interface Album {
 }
 
 function AlbumList() {
-  const [albumData, setAlbumData] = useState(null);
+  const [albums, setAlbums] = useState<Album[] | null>(null);
 
   useEffect(() => {
     const abortController = new AbortController();
     const fetchData = async () => {
       const response = await fetch("/photoAlbums.json");
       const json = await response.json();
-      setAlbumData(json);
+      setAlbums(json);
     }
 
     fetchData();
     return () => {
       abortController.abort();
     }
-  }, [setAlbumData]);
+  }, [setAlbums]);
 
   let content = null;
-  if(albumData === null){
+  if(albums === null){
     content = <div>...loading</div>
   }else{
-    const albumsNodes: Album[] = albumData;
-    const displayAlbums = albumsNodes.map(albumNode => {
+    const displayAlbums = albums.map(albumNode => {
       return (
                 <div key={albumNode.folderName} className="photo-album">
                   <img className="photo-album-cover" src={getCoverPath("http://localhost:8080", albumNode)} alt={albumNode.displayName} />
