@@ -1,8 +1,27 @@
 #website-header {
-    height: 80px;
+    position: relative;
+    height: 30px;
     font-style: italic;
     font-weight: bold;
-    font-size:larger;
     font-family: sans-serif;
+    padding: 15px;
+    padding-left: 70px;
+    border-bottom: 1px solid silver;
+    box-shadow: 0 3px 7px 0px #cdcdcd;
+    margin-bottom: 10px;
+}
+
+
+#website-header::before {
+    content: "";
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    background-image: url("../../images/logo.png");
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    left: 10px;
+    top: 2px;
 }
 
