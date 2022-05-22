@@ -36,18 +36,3 @@
     transform: rotate(360deg);
   }
 }
-.photo-album {
-  display: inline-block;
-  height: 150px;
-  width: 150px;
-  padding: 20px;
-}
-
-.photo-album-cover {
-  height: 150px;
-  width: 150px;
-}
-
-.photo-album-name {
-  color: blue;
-}
