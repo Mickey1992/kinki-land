@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
+
 #website-header {
     position: relative;
     height: 25px;
     font-style: italic;
     font-weight: bold;
-    font-family: sans-serif;
+    font-family: 'Alex Brush', cursive;
+    font-size: 25px;
     padding: 10px;
     padding-left: 60px;
     border-bottom: 1px solid silver;
@@ -31,5 +34,10 @@
 
 .blue {
     color: #033c8f;
+}
+
+#website-header > span
+{
+    margin-right: 5px;
 }
 
