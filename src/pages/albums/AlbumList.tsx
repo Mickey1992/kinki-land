@@ -44,7 +44,7 @@ function useAlbums() {
 function Album(props: {album: AlbumData}) {
   return (
     <div className="photo-album">
-      <span className="photo-album-cover"><img src={getCoverPath("http://192.168.162.123:8080", props.album)} alt={props.album.displayName} /></span>
+      <span className="photo-album-cover" style={{backgroundImage: `url("${getCoverPath("http://192.168.162.123:8080", props.album)}")`}} />
       <span className="photo-album-name" title={props.album.displayName}>{props.album.displayName}</span>
     </div> 
   )

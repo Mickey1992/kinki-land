@@ -3,24 +3,14 @@
     display: block;
     height: 200px;
     width: 100%;
-}
-
-.photo-album-cover > img {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .photo-album {
     display: inline-block;
     width: 200px;
     margin: 10px;
-    border: 1px dotted gray;
-    border-radius: 5px;
 }
 
 .photo-album-name {
@@ -30,3 +20,4 @@
     text-overflow: ellipsis;
     text-align: center;
 }
+
