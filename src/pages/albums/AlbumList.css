@@ -1,23 +1,71 @@
-.photo-album-cover {
-    position: relative;
-    display: block;
-    height: 200px;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
 .photo-album {
     display: inline-block;
+    position: relative;
     width: 200px;
-    margin: 10px;
+    margin: 30px 10px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@500&display=swap');
 .photo-album-name {
     display: block;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
+    font-family: 'M PLUS 1', sans-serif;
+    color: #464646;
 }
 
+.cover {
+    display: block;
+    position: relative;
+    height: 150px;
+    width: 100px;
+    padding-left: 50px;
+    margin-bottom: 5px;
+}
+
+.cover-photo1 {
+    position: absolute;
+    display: block;
+    height: 120px;
+    width: 80px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: rotateY(20deg) skewY(5deg) translate(20%, 5%);
+    z-index: 1;
+}
+
+.cover-photo2 {
+    position: absolute;
+    display: block;
+    height: 120px;
+    width: 80px;
+    background-size:cover;
+    background-repeat: no-repeat;
+    transform: rotateY(40deg) skewY(15deg) translate(5%, 15%);
+    z-index: 2;
+}
+
+.cover::before {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 120px;
+    width: 120px;
+    background-color: hsl(46deg 100% 82%);
+    transform: rotateY(75deg) skewY(15deg) translate(-150%, 53%);
+    border-radius: 0% 3% 3% 0%;;  
+    z-index: 3;
+}
+
+.cover::after {
+    display: block;
+    position: absolute;
+    content: "";
+    height: 120px;
+    width: 85px;
+    background-color: hsl(46deg 100% 82%);
+    border-radius: 0% 3% 3% 0%;;  
+    z-index: 0;
+}

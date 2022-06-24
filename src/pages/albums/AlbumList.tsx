@@ -6,7 +6,6 @@ type AlbumNode = string | AlbumData;
 interface AlbumData {
     folderName: string,
     displayName: string;
-    cover?: string,
     children: AlbumNode[]
 }
 
@@ -44,25 +43,33 @@ function useAlbums() {
 function Album(props: {album: AlbumData}) {
   return (
     <div className="photo-album">
-      <span className="photo-album-cover" style={{backgroundImage: `url("${getCoverPath("http://192.168.162.123:8080", props.album)}")`}} />
+      <AlbumCover album={props.album} /> 
       <span className="photo-album-name" title={props.album.displayName}>{props.album.displayName}</span>
     </div> 
   )
 }
 
-function getCoverPath(parentPath: string, album: AlbumData) :string{
-  const newParentPath = parentPath + "/" + album.folderName;
+function AlbumCover(props: {album: AlbumData}) {
+  const photos = getCoverPath("http://192.168.162.123:8080", props.album);
+  return (
+    <div className="cover">
+      <div className="cover-photo1" style={{backgroundImage: `url("${photos[0]}")`}} />
+      <div className="cover-photo2" style={{backgroundImage: `url("${photos[1]}")`}} />
+    </div>
+  )
+}
 
-  if(album.cover){
-    return newParentPath + "/" + album.cover;
-  }
+function getCoverPath(parentPath: string, album: AlbumData) :string[]{
+  const newParentPath = parentPath + "/" + album.folderName;
   
   const lastFile = album.children.at(-1);
   //an album
   if(typeof lastFile === "object"){
     return getCoverPath(newParentPath, lastFile);
   }
-  return newParentPath + "/" + lastFile;
+
+
+  return [newParentPath + "/" + lastFile, newParentPath + "/" + album.children.at(-2)];
 }
 
 export default AlbumList;
