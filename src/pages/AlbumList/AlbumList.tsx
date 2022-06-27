@@ -19,6 +19,8 @@ function AlbumList() {
     return <div>...loading</div>
   }
 
+  console.info(generateRoutes("", albums));
+
   return (
     <Routes>
       <Route path="/" element={<AlbumDetail path={rootAlbumFolderPath} albumNodes={albums}/>}/>
@@ -48,16 +50,17 @@ function useAlbums() {
 }
 
 function generateRoutes(path:string, albumNodes: AlbumNode[]): JSX.Element[] {
-  const routes: JSX.Element[] = [];
+  let routes: JSX.Element[] = [];
   
   albumNodes.forEach(node => {
     if(typeof node === "object") {
       const newPath = path+"/"+node.folderName;
       routes.push(<Route key={newPath} path={encodeURI(newPath)} element={<AlbumDetail path={rootAlbumFolderPath+newPath} albumNodes={node.children}/>} />);
-      routes.concat(generateRoutes(newPath, node.children));
+      routes = routes.concat(generateRoutes(newPath, node.children));
     }
   });
 
+  
   return routes;
 }
 
