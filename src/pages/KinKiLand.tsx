@@ -1,4 +1,4 @@
-import AlbumList from "./albums/AlbumList";
+import AlbumList from "./AlbumList/AlbumList";
 import WebpageHeader from "./common/WebsiteHeader";
 
 export default function KinKiLand () {
