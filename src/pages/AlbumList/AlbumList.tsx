@@ -18,9 +18,10 @@ function AlbumList() {
   }
 
   return (
-    <>
-      {generateRoutes(albums)}
-    </>
+    <Routes>
+      <Route path="/" element={<AlbumDetail albumNodes={albums}/>}/>
+      {generateRoutes("", albums)}
+    </Routes>
   )
 }
 
@@ -44,12 +45,19 @@ function useAlbums() {
   return albums;
 }
 
-function generateRoutes(albums: AlbumData[]) {
-   return (
-    <Routes>
-      {albums.map(album => <Route key={album.folderName} path={encodeURI(album.folderName)} element={<AlbumDetail albumNodes={album.children}/>} />)}
-      <Route path="/" element={<AlbumDetail albumNodes={albums}/>}/>
-    </Routes>);
+function generateRoutes(path:string, albumNodes: AlbumNode[]): JSX.Element[] {
+  const routes: JSX.Element[] = [];
+  
+  albumNodes.forEach(node => {
+    if(typeof node === "object") {
+      const newPath = path+"/"+node.folderName;
+      routes.push(<Route key={newPath} path={encodeURI(newPath)} element={<AlbumDetail albumNodes={node.children}/>} />);
+      console.info(newPath);
+      routes.concat(generateRoutes(newPath, node.children));
+    }
+  });
+
+  return routes;
 }
 
 export default AlbumList;
