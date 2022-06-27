@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import AlbumDetail from '../AlbumDetail/AlbumDetail';
 import './AlbumList.css';
 
 type AlbumNode = string | AlbumData;
@@ -14,10 +16,14 @@ function AlbumList() {
 
   if(albums === null){
     return <div>...loading</div>
-  }else{
-    return <>{albums.map(album => <Album key={album.folderName} album={album}/>)}</>
-
   }
+
+  return (
+    <>
+      {generateRoutes(albums)}
+      {albums.map(album => <Album key={album.folderName} album={album}/>)}
+    </>
+  )
 }
 
 function useAlbums() {
@@ -41,11 +47,13 @@ function useAlbums() {
 }
 
 function Album(props: {album: AlbumData}) {
+  const navigate = useNavigate();
+
   return (
-    <div className="photo-album">
+    <div className="photo-album" onClick={() => {navigate(encodeURI(props.album.folderName))}}>
       <AlbumCover album={props.album} /> 
       <span className="photo-album-name" title={props.album.displayName}>{props.album.displayName}</span>
-    </div> 
+    </div>
   )
 }
 
@@ -70,6 +78,13 @@ function getCoverPath(parentPath: string, album: AlbumData) :string[]{
 
 
   return [newParentPath + "/" + lastFile, newParentPath + "/" + album.children.at(-2)];
+}
+
+function generateRoutes(albums: AlbumData[]) {
+   return (
+    <Routes>
+      {albums.map(album => <Route path={encodeURI(album.folderName)} element={<AlbumDetail/>} />)}
+    </Routes>);
 }
 
 export default AlbumList;
