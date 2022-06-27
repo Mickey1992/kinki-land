@@ -47,8 +47,8 @@ function useAlbums() {
 function generateRoutes(albums: AlbumData[]) {
    return (
     <Routes>
-      {albums.map(album => <Route key={album.folderName} path={encodeURI(album.folderName)} element={<AlbumDetail node={album.children}/>} />)}
-      <Route path="/" element={<AlbumDetail node={albums}/>}/>
+      {albums.map(album => <Route key={album.folderName} path={encodeURI(album.folderName)} element={<AlbumDetail albumNodes={album.children}/>} />)}
+      <Route path="/" element={<AlbumDetail albumNodes={albums}/>}/>
     </Routes>);
 }
 
