@@ -10,6 +10,8 @@ export interface AlbumData {
     children: AlbumNode[]
 }
 
+const rootAlbumFolderPath = "http://192.168.162.123:8080";
+
 function AlbumList() {
   const albums = useAlbums();
 
@@ -19,7 +21,7 @@ function AlbumList() {
 
   return (
     <Routes>
-      <Route path="/" element={<AlbumDetail albumNodes={albums}/>}/>
+      <Route path="/" element={<AlbumDetail path={rootAlbumFolderPath} albumNodes={albums}/>}/>
       {generateRoutes("", albums)}
     </Routes>
   )
@@ -51,8 +53,7 @@ function generateRoutes(path:string, albumNodes: AlbumNode[]): JSX.Element[] {
   albumNodes.forEach(node => {
     if(typeof node === "object") {
       const newPath = path+"/"+node.folderName;
-      routes.push(<Route key={newPath} path={encodeURI(newPath)} element={<AlbumDetail albumNodes={node.children}/>} />);
-      console.info(newPath);
+      routes.push(<Route key={newPath} path={encodeURI(newPath)} element={<AlbumDetail path={rootAlbumFolderPath+newPath} albumNodes={node.children}/>} />);
       routes.concat(generateRoutes(newPath, node.children));
     }
   });

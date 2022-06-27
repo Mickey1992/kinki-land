@@ -2,19 +2,19 @@ import { useNavigate } from "react-router-dom";
 import { AlbumData } from "../AlbumList/AlbumList";
 import './Album.css';
 
-export default function Album(props: {album: AlbumData}) {
+export default function Album(props: {path: string, album: AlbumData}) {
     const navigate = useNavigate();
   
     return (
       <div className="photo-album" onClick={() => {navigate(encodeURI(props.album.folderName))}}>
-        <AlbumCover album={props.album} /> 
+        <AlbumCover path={props.path} album={props.album} /> 
         <span className="photo-album-name" title={props.album.displayName}>{props.album.displayName}</span>
       </div>
     )
   }
   
-  function AlbumCover(props: {album: AlbumData}) {
-    const photos = getCoverPath("http://192.168.162.123:8080", props.album);
+  function AlbumCover(props: {path: string, album: AlbumData}) {
+    const photos = getCoverPath(props.path, props.album);
     return (
       <div className="cover">
         <div className="cover-photo1" style={{backgroundImage: `url("${photos[0]}")`}} />
@@ -23,14 +23,13 @@ export default function Album(props: {album: AlbumData}) {
     )
   }
   
-  function getCoverPath(parentPath: string, album: AlbumData) :string[]{
-    const newParentPath = parentPath + "/" + album.folderName;
-    
+  function getCoverPath(path: string, album: AlbumData) :string[]{
     const lastFile = album.children.at(-1);
     //an album
     if(typeof lastFile === "object"){
-      return getCoverPath(newParentPath, lastFile);
+        const childPath = path + "/" + lastFile.folderName;
+        return getCoverPath(childPath, lastFile);
     }
     
-    return [newParentPath + "/" + lastFile, newParentPath + "/" + album.children.at(-2)];
+    return [path + "/" + lastFile, path + "/" + album.children.at(-2)];
 }
