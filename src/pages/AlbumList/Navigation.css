@@ -1,0 +1,84 @@
+.navigation {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.navigation-tag {
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    line-height: 25px;
+    margin-right: 0px;
+    padding: 0 5px 0 20px;
+    color: white;
+}
+
+.navigation-tag>a {
+    text-decoration: none;
+    color: white;
+}
+
+.navigation-tag::after {
+    content: "";
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    border: 12.5px;
+    border-right-width: 0px;
+    border-style: solid;
+    border-color: transparent;
+    position: absolute;
+    right: -12.5px;
+    z-index: 1;
+}
+
+
+
+.navigation-tag-0 {
+    padding-left: 7.5px;
+    background-color: #4ea4dd;
+}
+
+.navigation-tag-0::after {
+    border-left-color: #4ea4dd;
+}
+
+.navigation-tag-0.has-link:hover {
+    background-color: #04619f;
+}
+
+.navigation-tag-0.has-link:hover::after {
+    border-left-color: #04619f;
+}
+
+.navigation-tag-1 {
+    background-color: #dd9384;
+}
+
+.navigation-tag-1::after {
+    border-left-color: #dd9384;
+}
+
+.navigation-tag-1.has-link:hover {
+    background-color: #cf553c;
+}
+
+.navigation-tag-1.has-link:hover::after {
+    border-left-color: #cf553c;
+}
+
+.navigation-tag-2 {
+    background-color: #ef828f;
+}
+
+.navigation-tag-2::after {
+    border-left-color: #ef828f;
+}
+
+.navigation-tag-3.has-link:hover {
+    background-color: #eb3a4e;
+}
+
+.navigation-tag-3.has-link:hover::after {
+    border-left-color: #eb3a4e;
+}
