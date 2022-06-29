@@ -13,7 +13,7 @@ root.render(
     <BrowserRouter>
       <KinKiLand />
     </BrowserRouter>
-    
+
   </React.StrictMode>
 );
 

@@ -6,6 +6,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@500&display=swap');
+
 .photo-album-name {
     display: block;
     white-space: nowrap;
@@ -41,7 +42,7 @@
     display: block;
     height: 120px;
     width: 80px;
-    background-size:cover;
+    background-size: cover;
     background-repeat: no-repeat;
     transform: rotateY(40deg) skewY(15deg) translate(5%, 15%);
     z-index: 2;
@@ -55,7 +56,8 @@
     width: 120px;
     background-color: hsl(46deg 100% 82%);
     transform: rotateY(75deg) skewY(15deg) translate(-150%, 53%);
-    border-radius: 0% 3% 3% 0%;;  
+    border-radius: 0% 3% 3% 0%;
+    ;
     z-index: 3;
 }
 
@@ -66,6 +68,7 @@
     height: 120px;
     width: 85px;
     background-color: hsl(46deg 100% 82%);
-    border-radius: 0% 3% 3% 0%;;  
+    border-radius: 0% 3% 3% 0%;
+    ;
     z-index: 0;
 }
