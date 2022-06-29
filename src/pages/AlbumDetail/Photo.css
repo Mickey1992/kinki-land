@@ -21,3 +21,29 @@
     max-width: 100%;
 }
 
+.large-photo-background {
+    position: fixed;
+    top: 0px;
+    background-color: gray;
+    opacity: 0.8;
+    width: 100%;
+    height: 100%;
+}
+
+.large-photo-img {
+    position: absolute;
+    height: calc(80vh);
+    width: calc(80vw);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.large-photo-img> img {
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
