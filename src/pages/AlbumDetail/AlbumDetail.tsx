@@ -8,6 +8,10 @@ export default function AlbumDetail (props: {path: string, albumNodes: AlbumNode
     const folders = props.path.replace(ROOT_ALBUM_FOLDER_PATH, "").split("/").slice(1);
     const [largePhotoName, setLargePhotoName] = useState<string|null>(null);
 
+    useEffect(() => {
+        setLargePhotoName(null);
+    }, [setLargePhotoName, props.path])
+    
     return (
         <>
             <h3>{folders.join(" > ")}</h3>
