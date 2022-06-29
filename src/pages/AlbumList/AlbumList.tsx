@@ -19,8 +19,6 @@ function AlbumList() {
     return <div>...loading</div>
   }
 
-  console.info(generateRoutes("", albums));
-
   return (
     <Routes>
       <Route path="/" element={<AlbumDetail path={ROOT_ALBUM_FOLDER_PATH} albumNodes={albums}/>}/>
