@@ -20,3 +20,21 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task buildFrontEnd(type: Exec) {
+    workingDir 'frontend'
+    commandLine 'cmd', '/c', 'npm', 'run', 'build'
+}
+
+task cleanPublic(type: Delete) {
+    def dirName = "public"
+    file( dirName ).list().each{
+        f ->
+            delete "${dirName}/${f}"
+    }
+}
+
+task copyFrontEndBuildToPublic(type: Copy, dependsOn: [cleanPublic, buildFrontEnd]) {
+    from "frontend/build"
+    into "public"
+}
