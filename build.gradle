@@ -60,12 +60,18 @@ task copyFrontendBuildToDist(type: Copy, dependsOn: [cleanDist, buildFrontEnd]) 
 bootJar {
     mustRunAfter "clean"
 }
+
 task copyJarToDist(type: Copy, dependsOn: [clean, cleanDist, bootJar]) {
     from "build/libs"
     into "dist/libs"
 }
 
-task dist(type: Zip, dependsOn: [copyJarToDist, copyFrontendBuildToDist]) {
+task copyShellToDist(type: Copy, dependsOn: [cleanDist]) {
+    from "shell"
+    into "dist"
+}
+
+task dist(type: Zip, dependsOn: [copyJarToDist, copyFrontendBuildToDist, copyShellToDist, copyFrontEndBuildToPublic]) {
     from 'dist/'
     include '**'
     archiveName 'kinki-land.zip'
