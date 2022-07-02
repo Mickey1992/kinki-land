@@ -1,5 +1,6 @@
 package com.kinki.land.app.conf;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.PathResource;
@@ -22,6 +23,9 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @EnableWebFlux
 public class WebConfig implements WebFluxConfigurer {
     private static final Pattern _EXTENSION_REGEX = Pattern.compile("^\\w+$");
+
+    @Value("${photo.resource.path}")
+    private final String _PHOTO_RESOURCE_PATH = null;
 
     @Bean
     /*
@@ -49,8 +53,11 @@ public class WebConfig implements WebFluxConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/photos/**")
+                .addResourceLocations("http://192.168.162.123:8080/")
+                .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
         registry.addResourceHandler("**")
-                .addResourceLocations("/public")
+                .addResourceLocations("file:public/")
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
     }
 }

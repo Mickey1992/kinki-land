@@ -11,7 +11,7 @@ export interface AlbumData {
   children: AlbumNode[]
 }
 
-export const ROOT_ALBUM_FOLDER_PATH = "http://192.168.162.123:8080";
+const ROOT_PHOTO_RESOURCE_PATH = "/photos";
 
 function AlbumList() {
   const albums = useAlbums();
@@ -22,12 +22,12 @@ function AlbumList() {
     return <div>...loading</div>
   }
 
-  const albumFolders: string[] = currentAlbumPath.replace(ROOT_ALBUM_FOLDER_PATH, "").split("/").slice(1);
+  const albumFolders: string[] = currentAlbumPath.replace(ROOT_PHOTO_RESOURCE_PATH, "").split("/").slice(1);
   return (
     <>
       <Navigation folders={albumFolders} />
       <Routes>
-        <Route path="/" element={<AlbumDetail path={ROOT_ALBUM_FOLDER_PATH} albumNodes={albums} setCurrentAlbumPath={setCurrentAlbumPath} />} />
+        <Route path="/" element={<AlbumDetail path={ROOT_PHOTO_RESOURCE_PATH} albumNodes={albums} setCurrentAlbumPath={setCurrentAlbumPath} />} />
         {generateRoutes("", albums, setCurrentAlbumPath)}
       </Routes>
     </>
@@ -62,7 +62,7 @@ function generateRoutes(path: string, albumNodes: AlbumNode[], setCurrentFolder:
       const newPath = path + "/" + node.folderName;
       routes.push(<Route key={newPath}
         path={encodeURI(newPath)}
-        element={<AlbumDetail path={ROOT_ALBUM_FOLDER_PATH + newPath} albumNodes={node.children} setCurrentAlbumPath={setCurrentFolder} />}
+        element={<AlbumDetail path={ROOT_PHOTO_RESOURCE_PATH + newPath} albumNodes={node.children} setCurrentAlbumPath={setCurrentFolder} />}
       />);
       routes = routes.concat(generateRoutes(newPath, node.children, setCurrentFolder));
     }
