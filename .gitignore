@@ -25,3 +25,5 @@
 .gradle
 /build
 /public
+/dist
+/output
