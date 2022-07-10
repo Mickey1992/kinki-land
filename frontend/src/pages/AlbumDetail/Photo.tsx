@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './Photo.css'
 interface PhotoProps {
     folderName: string,
@@ -14,6 +15,18 @@ export default function Photo(props: PhotoProps) {
 }
 
 export function LargePhoto(props: PhotoProps) {
+    useEffect(() => {
+        const handleKeyPress = (event: KeyboardEvent) => {
+            if (event.key === "Esc" || event.key === "Escape") {
+                props.setLargePhotoName(null);
+            }
+        }
+        window.addEventListener("keydown", handleKeyPress);
+        return () => {
+            window.removeEventListener("keydown", handleKeyPress);
+        }
+    }, [props])
+
     return (
         <div className="large-photo" onClick={e => handleLargePhotoClick(e, props.setLargePhotoName)}>
             <div className='large-photo-background'></div>
