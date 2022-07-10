@@ -11,7 +11,7 @@ export interface AlbumData {
   children: AlbumNode[]
 }
 
-const ROOT_PHOTO_RESOURCE_PATH = "/photos";
+const ROOT_PHOTO_RESOURCE_PATH = window.location.port === "3000" ? "http://192.168.162.123:8080" : "/photos";
 
 function AlbumList() {
   const albums = useAlbums();
