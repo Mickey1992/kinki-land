@@ -1,0 +1,6 @@
+server:
+  port: 24451
+kinki.land:
+  photo:
+    resource:
+      path: "file:/home/Mickey1992/Photos/"

@@ -71,7 +71,13 @@ task copyShellToDist(type: Copy, dependsOn: [cleanDist]) {
     into "dist"
 }
 
-task dist(type: Zip, dependsOn: [copyJarToDist, copyFrontendBuildToDist, copyShellToDist, copyFrontEndBuildToPublic]) {
+task copyConfigurationToDist(type: Copy, dependsOn: [cleanDist]) {
+    from "config"
+    into "dist/config"
+}
+
+task dist(type: Zip, dependsOn: [copyJarToDist, copyFrontendBuildToDist, copyShellToDist, copyFrontEndBuildToPublic, copyConfigurationToDist
+]) {
     from 'dist/'
     include '**'
     archiveName 'kinki-land.zip'

@@ -1,0 +1,6 @@
+server:
+  port: 24451
+kinki.land:
+  photo:
+    resource:
+      path: "http://192.168.162.123:8080/"

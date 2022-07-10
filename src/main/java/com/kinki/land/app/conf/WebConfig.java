@@ -24,7 +24,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 public class WebConfig implements WebFluxConfigurer {
     private static final Pattern _EXTENSION_REGEX = Pattern.compile("^\\w+$");
 
-    @Value("${photo.resource.path}")
+    @Value("${kinki.land.photo.resource.path}")
     private final String _PHOTO_RESOURCE_PATH = null;
 
     @Bean
@@ -54,7 +54,7 @@ public class WebConfig implements WebFluxConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/photos/**")
-                .addResourceLocations("http://192.168.162.123:8080/")
+                .addResourceLocations(_PHOTO_RESOURCE_PATH)
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
         registry.addResourceHandler("**")
                 .addResourceLocations("file:public/")
