@@ -2,34 +2,44 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import "./Navigation.css"
 
-export default function Navigation(props: { folders: string[] }) {
-    const naviTags: JSX.Element[] = [];
-    let className: string = "navigation-tag-0"
-    naviTags.push(props.folders.length === 0 ? <NavigationTag key="0" className={className}>Home</NavigationTag> : <NavigationTag key="0" link="/" className={className}>Home</NavigationTag>)
+interface NavigationProps {
+    navigationPath: string[]
+}
 
-    for (let i = 0; i < props.folders.length - 1; i++) {
+export default function Navigation({ navigationPath }: NavigationProps) {
+    const navigationTags: JSX.Element[] = [];
+    let className: string = "navigation-tag-0"
+    navigationTags.push(navigationPath.length === 0 ? <NavigationTag key="0" className={className}>Home</NavigationTag> : <NavigationTag key="0" link="/" className={className}>Home</NavigationTag>)
+
+    for (let i = 0; i < navigationPath.length - 1; i++) {
         className = "navigation-tag-" + (i + 1)
-        const folder = props.folders[i];
-        naviTags.push(
-            <NavigationTag key={i + 1} link={"/" + props.folders.slice(0, i + 1).join("/")} className={className}>{folder}</NavigationTag>
+        const navigationItem = navigationPath[i];
+        navigationTags.push(
+            <NavigationTag key={i + 1} link={"/" + navigationPath.slice(0, i + 1).join("/")} className={className}>{navigationItem}</NavigationTag>
         );
     }
 
-    className = "navigation-tag-" + props.folders.length
-    props.folders.length > 0 && naviTags.push(<NavigationTag key={props.folders.length} className={className}>{props.folders[props.folders.length - 1]}</NavigationTag>);
+    className = "navigation-tag-" + navigationPath.length
+    navigationPath.length > 0 && navigationTags.push(<NavigationTag key={navigationPath.length} className={className}>{navigationPath[navigationPath.length - 1]}</NavigationTag>);
 
     return (
         <div className="navigation">
-            {naviTags}
+            {navigationTags}
         </div>
     )
 
 }
 
-function NavigationTag(props: { children: ReactNode, link?: string, className: string }) {
+interface NavigationTagProps {
+    children: ReactNode,
+    link?: string,
+    className: string
+}
+
+function NavigationTag({ children, link, className }: NavigationTagProps) {
     return (
-        <span className={`navigation-tag ${props.className} ${props.link ? "has-link" : "no-link"}`}>
-            {props.link ? <Link to={props.link}>{props.children}</Link> : props.children}
+        <span className={`navigation-tag ${className} ${link ? "has-link" : "no-link"}`}>
+            {link ? <Link to={link}>{children}</Link> : children}
         </span>
     )
 }

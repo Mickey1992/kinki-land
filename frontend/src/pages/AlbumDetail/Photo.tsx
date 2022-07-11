@@ -1,37 +1,37 @@
 import { useEffect } from 'react'
 import './Photo.css'
 interface PhotoProps {
-    folderName: string,
-    fileName: string,
-    setLargePhotoName: React.Dispatch<React.SetStateAction<string | null>>
+    albumURL: string,
+    photoFileName: string,
+    setLargePhotoFileName: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-export default function Photo(props: PhotoProps) {
+export default function Photo({ albumURL, photoFileName, setLargePhotoFileName }: PhotoProps) {
     return (
-        <div className="photo" onClick={() => props.setLargePhotoName!(props.fileName)}>
-            <img src={props.folderName + "/" + props.fileName} alt={props.fileName} />
+        <div className="photo" onClick={() => setLargePhotoFileName!(photoFileName)}>
+            <img src={albumURL + "/" + photoFileName} alt={photoFileName} />
         </div>
     )
 }
 
-export function LargePhoto(props: PhotoProps) {
+export function LargePhoto({ albumURL, photoFileName, setLargePhotoFileName }: PhotoProps) {
     useEffect(() => {
-        const handleKeyPress = (event: KeyboardEvent) => {
-            if (event.key === "Esc" || event.key === "Escape") {
-                props.setLargePhotoName(null);
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setLargePhotoFileName(null);
             }
         }
-        window.addEventListener("keydown", handleKeyPress);
+        window.addEventListener("keydown", handleKeyDown);
         return () => {
-            window.removeEventListener("keydown", handleKeyPress);
+            window.removeEventListener("keydown", handleKeyDown);
         }
-    }, [props])
+    }, [setLargePhotoFileName])
 
     return (
-        <div className="large-photo" onClick={e => handleLargePhotoClick(e, props.setLargePhotoName)}>
+        <div className="large-photo" onClick={e => handleLargePhotoClick(e, setLargePhotoFileName)}>
             <div className='large-photo-background'></div>
             <div className="large-photo-img">
-                <img src={props.folderName + "/" + props.fileName} alt={props.fileName} />
+                <img src={albumURL + "/" + photoFileName} alt={photoFileName} />
             </div>
         </div>
     )

@@ -4,30 +4,30 @@ import Album from "./Album";
 import Photo, { LargePhoto } from "./Photo";
 
 interface AlbumDetailProps {
-    path: string,
+    albumURL: string,
     albumNodes: AlbumNode[],
-    setCurrentAlbumPath: React.Dispatch<React.SetStateAction<string>>
+    setCurrentAlbumURL: React.Dispatch<React.SetStateAction<string>>
 }
-export default function AlbumDetail(props: AlbumDetailProps) {
-    const [largePhotoName, setLargePhotoName] = useState<string | null>(null);
+export default function AlbumDetail({ albumURL, albumNodes, setCurrentAlbumURL }: AlbumDetailProps) {
+    const [largePhotoFileName, setLargePhotoFileName] = useState<string | null>(null);
 
     useEffect(() => {
-        setLargePhotoName(null);
-        props.setCurrentAlbumPath(props.path);
-    }, [setLargePhotoName, props])
+        setLargePhotoFileName(null);
+        setCurrentAlbumURL(albumURL);
+    }, [setLargePhotoFileName, setCurrentAlbumURL, albumURL])
 
     return (
         <>
             {
-                props.albumNodes.map(node => {
+                albumNodes.map(node => {
                     if (typeof node === "string") {
-                        return <Photo key={node} folderName={props.path} fileName={node} setLargePhotoName={setLargePhotoName} />
+                        return <Photo key={node} albumURL={albumURL} photoFileName={node} setLargePhotoFileName={setLargePhotoFileName} />
                     }
-                    const newPath = props.path + "/" + node.folderName;
-                    return <Album key={node.folderName} path={newPath} album={node} />
+                    const newURL = albumURL + "/" + node.folderName;
+                    return <Album key={node.folderName} albumURL={newURL} album={node} />
                 })
             }
-            {largePhotoName && <LargePhoto folderName={props.path} fileName={largePhotoName} setLargePhotoName={setLargePhotoName} />}
+            {largePhotoFileName && <LargePhoto albumURL={albumURL} photoFileName={largePhotoFileName} setLargePhotoFileName={setLargePhotoFileName} />}
         </>
     )
 }
