@@ -14,7 +14,7 @@ configuration:
 
   loggers:
     logger:
-      name: com.kinki.land
+      name: log.kinki.land
       level: info
       additivity: true
       appenderRef:
