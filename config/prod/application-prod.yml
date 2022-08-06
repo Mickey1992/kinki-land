@@ -4,3 +4,6 @@ kinki.land:
   photo:
     resource:
       path: "file:/home/Mickey1992/Photos/"
+
+logging:
+  config: ./config/prod/log4j2.yml

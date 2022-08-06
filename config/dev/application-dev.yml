@@ -4,3 +4,6 @@ kinki.land:
   photo:
     resource:
       path: "http://192.168.162.123:8080/"
+
+logging:
+  config: ./config/dev/log4j2.yml

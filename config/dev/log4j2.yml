@@ -20,6 +20,6 @@ configuration:
       appenderRef:
         ref: FILE
     root:
-      level: info
+      level: debug
       appenderRef:
         ref: STDOUT
