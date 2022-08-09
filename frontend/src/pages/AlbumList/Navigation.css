@@ -68,17 +68,17 @@
 }
 
 .navigation-tag-2 {
-    background-color: #ef828f;
+    background-color: #F4BFBF;
 }
 
 .navigation-tag-2::after {
-    border-left-color: #ef828f;
+    border-left-color: #F4BFBF;
 }
 
 .navigation-tag-3.has-link:hover {
-    background-color: #eb3a4e;
+    background-color: #B25068;
 }
 
 .navigation-tag-3.has-link:hover::after {
-    border-left-color: #eb3a4e;
+    border-left-color: #B25068;
 }
