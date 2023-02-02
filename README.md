@@ -44,3 +44,49 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+```java
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+
+public class LazyRobot {
+
+    private final Robot robot;
+
+    public LazyRobot() throws AWTException {
+        this.robot = new Robot();
+    }
+
+    public void start() throws InterruptedException {
+        Random random = new Random();
+        while (true) {
+            int waitSeconds = random.nextInt(10) + 3;
+            wait(waitSeconds);
+            switchWindow();
+        }
+    }
+
+    public void wait(int seconds) throws InterruptedException {
+        System.out.println("Going to sleep for " + seconds + " seconds");
+        for (int i = 0; i < seconds; i++) {
+            Thread.sleep(1000);
+            System.out.println("Slept " + (i + 1) + " seconds");
+        }
+        System.out.println("Sleep finished");
+    }
+
+    public void switchWindow() {
+        System.out.println("Start to switch window");
+        robot.keyPress(KeyEvent.VK_ALT);
+        robot.keyPress(KeyEvent.VK_TAB);
+        robot.keyRelease(KeyEvent.VK_ALT);
+        robot.keyRelease(KeyEvent.VK_TAB);
+        System.out.println("Switched");
+    }
+    public static void main(String[] args) throws AWTException, InterruptedException {
+        new LazyRobot().start();
+    }
+}
+```
